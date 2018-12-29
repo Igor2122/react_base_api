@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import RecepieCard from './RecpieCard';
 
  class Recepie extends Component {
     
     constructor (){
         super();
         this.state = {
-            recepies: []
+            recepies: [],
+            error: false
         }
         
         console.log(super());
@@ -17,25 +19,36 @@ import axios from 'axios';
         axios.get('/api/recepie')
         .then(response => {
             // console.log(response);
-            this.setState({recepies: response.data});
-            console.log(this.state.recepies);
+            this.setState({
+                recepies: response.data
+            })
+            .catch(error => {
+                // console.log(error);
+                this.setState({error: true});
+            });
+            
         })
     } 
      
     render() {
+        
+        console.log(this.state.recepies);
+         
+        let recepie = <p>Recepies did not load!</p>;
+        
+            recepie = this.state.recepies.map(res => {
+                return  <RecepieCard 
+                    key={res.id}
+                    name={res.name} 
+                    ingredients={res.ingredients}/>
+            })
+            
+        
+                
+        
         return (
             <div className="container">
-                <div className="row justify-content-center">
-                    <div className="col-md-8">
-                        <div className="card">
-                            <div className="card-header">Recepie Component</div>
-
-                            <div className="card-body">
-                                I'm an example component!
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {recepie}
             </div>
         );
     }

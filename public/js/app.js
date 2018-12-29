@@ -60020,6 +60020,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _RecpieCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RecpieCard */ "./resources/js/components/RecpieCard.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60042,6 +60043,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Recepie =
 /*#__PURE__*/
 function (_Component) {
@@ -60054,7 +60056,8 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Recepie).call(this));
     _this.state = {
-      recepies: []
+      recepies: [],
+      error: false
     };
     console.log(_this = _possibleConstructorReturn(this, _getPrototypeOf(Recepie).call(this)));
     return _this;
@@ -60069,27 +60072,29 @@ function (_Component) {
         // console.log(response);
         _this2.setState({
           recepies: response.data
+        }).catch(function (error) {
+          // console.log(error);
+          _this2.setState({
+            error: true
+          });
         });
-
-        console.log(_this2.state.recepies);
       });
     }
   }, {
     key: "render",
     value: function render() {
+      console.log(this.state.recepies);
+      var recepie = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Recepies did not load!");
+      recepie = this.state.recepies.map(function (res) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecpieCard__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          key: res.id,
+          name: res.name,
+          ingredients: res.ingredients
+        });
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row justify-content-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-8"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-header"
-      }, "Recepie Component"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body"
-      }, "I'm an example component!")))));
+      }, recepie);
     }
   }]);
 
@@ -60097,6 +60102,37 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (Recepie);
+
+/***/ }),
+
+/***/ "./resources/js/components/RecpieCard.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/RecpieCard.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var recepie = function recepie(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row justify-content-center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-header"
+  }, props.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, props.ingredients))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (recepie);
 
 /***/ }),
 
