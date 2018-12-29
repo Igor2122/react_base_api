@@ -60062,7 +60062,18 @@ function (_Component) {
 
   _createClass(Recepie, [{
     key: "componentDidMount",
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/recepie').then(function (response) {
+        // console.log(response);
+        _this2.setState({
+          recepies: response.data
+        });
+
+        console.log(_this2.state.recepies);
+      });
+    }
   }, {
     key: "render",
     value: function render() {

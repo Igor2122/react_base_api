@@ -14,7 +14,12 @@ import axios from 'axios';
     } 
      
     componentDidMount(){
-        
+        axios.get('/api/recepie')
+        .then(response => {
+            // console.log(response);
+            this.setState({recepies: response.data});
+            console.log(this.state.recepies);
+        })
     } 
      
     render() {
